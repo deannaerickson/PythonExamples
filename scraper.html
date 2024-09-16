@@ -1,0 +1,57 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CNN Headlines</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                color: #333;
+            }
+            h1 {
+                color: #007BFF;
+            }
+            ul {
+                list-style-type: none;
+                padding: 0;
+            }
+            li {
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Latest CNN Headlines</h1>
+        <ul>
+    '''
+
+    for headline in headlines:
+        html_content += f'<li>{headline}</li>\n'
+
+    html_content += '''
+        </ul>
+    </body>
+    </html>
+    '''
+
+    return html_content
+
+def save_html(content, filename):
+    with open(filename, 'w', encoding='utf-8') as file:
+        file.write(content)
+
+def main():
+    print("Scraping CNN headlines...")
+    try:
+        headlines = scrape_cnn_headlines()
+        html_content = generate_html(headlines)
+        save_html(html_content, 'cnn_headlines.html')
+        print("HTML file 'cnn_headlines.html' created successfully.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    main()
